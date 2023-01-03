@@ -2,7 +2,7 @@
 
 My distillation of the famous [Peacock Thread](https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=51486) by Murrkf for Broadcom router chipsets. Why? The original, useful as it is, is a meandering path of informative nuggets trapped in a cesspool of needless verbiage. If you want a Hemingway novel, walk to your friendly neighborhood indie bookshop instead.
 
-Read through all the notes starting with [Note 1](), or just pick and choose below.
+Read through all the notes starting with [Note 1](#note1), or just pick and choose below.
 
 *For Broadcom only!*
 
