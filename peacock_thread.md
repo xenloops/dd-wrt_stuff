@@ -1,4 +1,4 @@
-# Peacock Thread -- _for Broadcom only_
+# Peacock Thread -- _for Broadcom-based routers only_
 
 My distillation of the essential [Peacock Thread](https://forum.dd-wrt.com/phpBB2/viewtopic.php?t=51486) by Murrkf for Broadcom router chipsets. Why? The original, useful as it is, is a meandering path of informative nuggets wrapped in a cesspool of needless verbiage. If you want a Hemingway novel, walk to your friendly neighborhood indie bookshop or library instead.
 
@@ -112,92 +112,66 @@ Read through all the notes starting with [Note 1](#note1), or just pick and choo
 <details>
   <summary> Note 4: Understanding DD-WRT build options <a name="note4"></a> </summary>
  
- CHECK and UNDERSTAND the proper build for your router. The ROUTER memory (flash memory...not RAM) determines what build you can put on it. It is simple math. If you have a 4mb flash chip, you can't put a build larger than 4mb on it because it won't fit, even if you wish to have advanced features. In other words, don't look at the features and decide which one you want and then install it. You will often brick your router. This is bad.
+  Various factors govern which builds are right for a router. It is the user's responsibility to double-check and understand the proper build to use. 
+ 
+  * The router's _flash_ memory (not RAM) determines which builds can run on it. A router with a 4 MB flash chip simply cannot take a build larger than 4 MB, no matter how tantalizing the advanced features. _Attempting to install a larger build than will fit on the router will often brick the router._
+  * Trailed builds are builds with the router model in the name. "Brainslayer" builds are often (but not always) trailed builds. These builds are often necessary for initial flashing of a router with OEM firmware because they have the right header in the file that allows it to be flashed onto the stock firmware. Once DD-WRT is installed, do _not_ use a trailed build, but install a generic build instead.
+  * Certain Linksys routers (e.g. E2000, E3000, and E4200) that allocate NVRAM in a nonstandard way are the exception. These routers must always use a trailed build for initial flashing, and some upgrades from initial flashing require the nv60 or nv64 builds. For these routers:
+     * Do the initial flash with the trailed build that contains your router model number (e.g. xxx_e2000.bin for an E2000 model). Once the initial flash is done, upgrade using the build that contains xxx_e2k_e3k.bin for all subsequent flashes. (
+     * If using a 16758 or higher build, you _must_ use a nv60k build rather than the e2k-e3k build - See the wiki for your router and [this post](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=148350).
+     * Builds with "nv60k" in the name can only be used with routers that have a 60k NVRAM space, and those with "nv64k" in the name can only be used on routers that have a 64k NVRAM space. Using one of these builds on a router that doesn't support it _will brick the router_. Not using one of these builds on a router that needs it _will also brick the router_. The router's wiki page shows whether the router needs to use these builds. No k24 supported routers use nv60/nv64. See [this thread](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=156851) for specific models that must use the nv60 or nv64 builds.
+ 
+ ## Flashing the router
+ 
+  * Follow the process in the [Installation wiki page](http://www.dd-wrt.com/wiki/index.php/Installation) to flash the router. 
+  * Once DD-WRT is installed on the router, you can change to **any generic stable build** that the flash will support by upgrading using the DD-WRT GUI. You do not have to stick with the build in the wiki install for your router, but do understand what builds can be flashed to your router.
+  * To choose a build, understand these factors:
+    1. The process for flashing
+    1. The flash memory size of the router (not to be confused with RAM). See the [Supported Devices](http://www.dd-wrt.com/wiki/index.php/Supported_Devices) wiki.
+    1. The build type (micro, mini, standard, or mega). You should use the build type specified in the router's wiki page and/or [Supported Devices](http://www.dd-wrt.com/wiki/index.php/Supported_Devices) wiki.
+    1. Whether you need newd, K26, nv60 or nv64.
+    1. Then you can pick the build (14929, 17990, 12548 etc.) that you want to flash. You don't _have_ to use the build version recommended in the wiki, but it is a good practice to do so unless you undestand how all this works.
 
+Use this table to determine which type to flash (also see notes below table):
 
-Trailed builds are builds with the router model in the name. BS builds are often, but not always trailed builds. These builds are often necessary for initial flashing of a virgin router because they have the right header in the file that allows it to be flashed on the stock firmware. Once dd-wrt is installed, you should not use a trailed build, and should use a generic build instead UNLESS you have one of the new Linksys Routers (E2000, E3000 E4200) that allocate nvram differently. Those routers (eg. E2000 and E3000, E4200) must ALWAY USE A TRAILED BUILD for initial flashing, and some upgrades from initial flashing REQUIRE nv60 or nv64 builds. (See below for further info.).
+| Type options | Micro | Mini | Standard | Mega |
+|--|--|--|--|--|
+| Min router flash size | 2 MB | 4 MB | 4 MB | 8 MB |
+| Notes | NEWD/Vint | NEWD/k26/nv60/nv64 | NEWD/k26/nv60/nv64 | Builds up to 8 MB |
 
-Additional Note for E2000 E3000 and E4200 etc. users:
-Do the initial flash with the trailed build that contains your router model number...(example...xxx_e2000.bin for a E2000 model) Once you have done the initial flash...you can upgrade firmware using the build that contains xxx_e2k_e3k.bin for all subsequent flashes. (If you are using a 16758 or higher build, which is newer than is recommended, you must use a nv60k build rather than the e2k-e3k build - See the wiki for your router and this post: http://www.dd-wrt.com/phpBB2/viewtopic.php?t=148350)
+Check the size of new firmware file before flashing it to the router. Flashing too large a file can brick the router.
 
-Builds with nv60k in the name can only be used with routers that have a 60k nvram space. Builds with nv64k in the name can only be used on routers that have a 64k nvram space. If you use one of these builds and your router doesn't support it, you will brick your router and will need a serial cable to fix it. If you don't use one of these builds and your router needs it, you will brick your router and will need a serial cable to fix it. These nv60k/nv64k are only being used in many new routers, and the need to use these builds, if it applies to your router SHOULD be explained in the wiki for your router. No k24 supported routers use nv60/nv64.
+| Flash size (MB) | Max firmware size (b) |
+|--|--|
+| 2 | 1,769,472 (1,900,544 compressed CFE) |
+| 4 | 3,801,088 (3,735,552 Netgear) |
+| 8 | 7,995,392 |
 
-See this thread for specific models that must use nv60 or nv64 builds:
-http://www.dd-wrt.com/phpBB2/viewtopic.php?t=156851
+Notes:
+  * Do _not_ use Micro builds on routers with N WiFi. This can brick the router.
+  * Do _not_ use Micro Plus on any router unless it has a [compressed CFE](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=38844). If you didn't compress your CFE, or don't know what it is, _do not use Micro Plus_.
+  * Netgear routers often cannot flash standard builds due to an extra partition on the flash chip.
+  * For routers with 8 MB flash, use any generic build you wish (subject to k26 or nv60/64 specific builds that your specific router might need), unless the build is larger than the 8 MB flash size, as with some later Mega builds.
+  * For routers with 4 MB flash, if you don't know what build to use, flash Mini. You can always reflash later.
+  * Do _not_ use Micro builds for 8+ MB routers.
+  * NEWD vs Vint vs NEWD2 vs K26: 
+    * NEWD is the **new d**river based on Linux kernel 2.4. Many older routers use this. NEWD has only "NEWD" (not "NEWD2") in the filename. All Brainslayer builds without "K26" in the filename are NEWD builds. Most routers should use NEWD rather than Vint when they can.
+    * Vint is the older **vint**age driver for early Linksys routers, based on kernel 2.4. Vint has "VINT" in the filename. Vint is for old routers that cannot support the new wireless drivers.
+    * NEWD-2 is a newer driver that is available both in a kernel 2.4 and a kernel 2.6. NEWD-2 has "NEWD2" in the filename. Don't use a kernel24 NEWD-2. There is no benefit that we have found.
+    * K26 is the kernel that some newer routers _must_ use, containing the NEWD-2 driver. If the original flash specified in the router wiki was a build with "k26" in the filename, that router must _always_ use a k26 build. Using K26 on a router that doesn't support it, or failing to use K26 on a router that requires it, _will brick the router_. K26 has "K26" in the filename. [This thread](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=63757&start=0) shows whether many routers need K26.
+    * Some routers use a 60 kb or 64 kb NVRAM space, and must use either a 60K or 64K build.
+    * Never use a build that predates the support for that router.
+    * Never use builds that have a specific name of a router in the name of build unless it is the name of your router (these are called 'trailed builds').
 
-FOLLOW THE PROCESS FOR FLASHING YOUR ROUTER THAT IS IN THE WIKI.
-http://www.dd-wrt.com/wiki/index.php/Installation
-Once you have dd-wrt installed on your router, you can change to any generic stable build that the flash will support by upgrading using the webgui. You should not have to stick with the build in the wiki install for your router, but you do need to understand what builds can be flashed on your router!
+To find the core revision of the router (if needed):
+   * Corerevs for many models are listed in the [Corerev wiki](http://www.dd-wrt.com/wiki/index.php/Corerev).
+   * If the router already has DD-WRT installed, enter one of these commands in the Administration > Commands tab (or using a Telnet session or PuTTY terminal):
+   ```nvram get wl0_corerev```
+   or
+   ```nvram show|grep corerev```
 
-Read the rest of this note to understand builds to flash to your router, once dd-wrt is installed according to the wiki, and to make sure you are flashing a supported build for your router.
-
-To pick a build, there are three things you need to know. The process for flashing, the build type (micro, mini, standard or mega) and whether you need newd, K26, nv60 or nv64. Then you can pick the build svn (14929, 17990, 12548 etc.) that you want to flash.
-
-You don't have to use the build VERSION that are recommended in the wiki but it is a good practice to do so unless you undestand how all this works. You should use the build TYPE. (See below in this note.)
-
-You need to know whether you can put micro, mini, standard or mega on your router. You can determine what TYPE of build is supported on your router by going here:
-http://www.dd-wrt.com/wiki/index.php/Supported_Devices
-
-The supported devices wiki will also tell you the FLASH size that your router has. (DON'T Confuse flash with ram size). Your router will have 2, 4 or 8mb (or higher with modern routers)of Flash. The generic builds are not based on router models; trailed builds are only used for initial flashing. (Except for non standard nvram like E2000, E3000 Linksys)
-
-To determine what version TYPE to flash, use this guide:
-
-If you have 2mb of flash, you MUST use Micro.bin. (See below for how to determine if you need NEWD_Micro.bin or VINT_Micro.bin). You cannot use micro PLUS on ANY router unless it has a compressed CFE. If you didn't compress your CFE, or don't know what a compressed CFE is, DON'T USE MICRO PLUS. Info on compressed CFEs can be found here:
-http://www.dd-wrt.com/phpBB2/viewtopic.php?t=38844
-
-If you have 4mb of flash, you can use any mini or standard build as long as you get the newd/k26/nv60/nv64 choice right (see below in this note). You cannot use Mega on a router with 4mb of flash. Some of these builds have different features built in. If you don't need VPN, then you can get a VPN version, for example.
-
-IF you have 4mb of flash, and you don't know what build to use, just use MINI.bin. You can always reflash later.
-
-If you have 8mb of flash, you can use any generic build you wish. (Subject to k26 or nv60/64 specific builds that your specific router might need), unless the build is larger than the 8mb flash size. (Some recent mega builds have been) .
-Maximum firmware size
-To be on a safe side, please check the size of new firmware file before flashing it to your router. Flashing too large firmware file can brick your router. (Netgear Routers often cannot flash standard builds because of the extra partition they have on the flash chip.)
-2MB flash chip / normal cfe (256k) : 1769472 bytes
-2MB flash chip / compressed cfe (128k): 1900544 bytes
-4MB flash chip (not Netgear): 3801088 bytes
-4MB flash chip Netgear routers: 3735552 bytes
-8MB flash chip: 7995392 bytes
-
-Micro builds are not recommended for 8mb flash routers and Do NOT put a micro build on a router with an N radio. Using micro on an N router can brick some N routers.
-
-NEWD vs VINT vs NEWD2 vs K26
-
-NEWD is the NEW Driver based on the kernel 2.4. Many older routers use this. Vint is the very old Vintage driver for really early Linksys router from about 15 years ago, also based on kernel 2.4. Newd-2 is a newer driver that is available both in a kernel 2.4 and a kernel 2.6. Don’t use builds with newd2 in the name. K26 is the new kernel that some very new routers MUST use and it has the newd-2 driver. Using K26 on a router that doesn't support it, or failing to use K26 on a router that requires it will both brick the router.
-
-NEWD has only NEWD (NOT NEWD2) in the filename of the bin file...DON'T CONFUSE THIS WITH NEWD2. All Brainslayer builds without k26 in the filename are NEWD builds. NEWD-2 has NEWD2 in the filename. K26 has K26 in the filename of the .bin file. VINT has the word VINT in the filename.
-
-Most routers should use NEWD rather than VINT when they can. VINT is for old routers that cannot support the new wireless drivers and have a correv of 4 or less. Many new models can ONLY use k26 builds, as explained above - if your original flash from the wiki was a build with k26 in the filename, you must always flash with a k26 build.
-Correvs for many models are listed in the wiki:
-http://www.dd-wrt.com/wiki/index.php/Corerev
-If you have dd-wrt installed, here the command that you send to the router to check:
-
-nvram get wl0_corerev
-
-Do this from a telnet session or putty terminal window.
-It can also be done from the Administration>>Commands tab.
-In addition, some routers use a 60 or 64k nvram space, and must use EITHER a 60 or 64K build.
-CHECK all of this (Nv60, Build allowed etc.)and be sure. However, some of the information in the Wiki is out of date in that there are sometimes newer builds but generally the wiki install for your router has reliable specific instructions. If it says you can use generic_standard, then any standard build can be used.
-
-So, if it says that you can use, for example Generic_Standard v.24 12548 you could also use NEWD_Standard svn12874, or, if you need a VINT build, VINT_Standard svn12548. You should never use builds that have a specific name of the router in the name of build that is not the name of YOUR router! (These are also called 'trailed builds') Ie. Don't use v24-10700_NEWD_mini_wr850g-v2-v3.bin (which is for a wr850 v.2 router, in a WRT54gl router! If there is not a specific build for your router, use flash size to determine the build, as explained above.
-
-HOWEVER, especially with a newer router, please note that you can never flash a router with a build that predates the support for that router. Some very new router have just been supported (e2500, e3200 etc.). You cannot flash any build that was created before support was added for that router. So with newer router, you need to search to find out what build was the first one that could be used on that router, and make sure you ONLY FLASH builds that are that build or newer. Using 14929 will brick a newer router model that was not supported when 14929 was released.
-
-If you want to know the differences between the versions, and what each of the different builds includes, see this page in the wiki:
-https://wiki.dd-wrt.com/wiki/index.php/What_is_DD-WRT%3F#File_Versions
-For example, if you need a VPN version, you can check which build types support it, but remember that ALL other considerations (n64, version supported, k26 etc) STILL have to be correct for you to flash the build type you want. (DHC_Darkshadows has done some good work to keep that page detailed and up to date.}
-
-NEWD-2 was developed for some routers that could also use NEWD. So there was a choice of NEWD, or NEWD-2 for these routers. When k26 was developed it also used NEWD-2. So this meant there was a k24NEWD, and K24 NEWD-2 and and K26 NEWD-2. ALL k26 builds are NEWD-2.
-
-Don't use a kernel24 newd-2. There is no benefit that we have found. However, most routers developed in the last two years can ONLY use K26. Make sure you see this thread and check if your router can use K26 before flashing:
-
-http://www.dd-wrt.com/phpBB2/viewtopic.php?t=63757&start=0
-
-Also, to tell if you have one of the new routers that MUST ONLY use K26, you simply check the wiki install for your router and if you originally were told to use a K26 or a NV60 or NV64 build, you must continue to ALWAYS use a k26/nv60/nv64 build.
-
-IF you are wondering if you should use a build with olsrd in the name, then the answer is no. This is a case of "if you don't know what it is, you don't need it". OLSRD is for mesh networks.
-
-IF you have looked, and are not sure, ASK.
-
+Example: If the router's wiki page says that you can use Generic_Standard v.24 12548, you could also use NEWD_Standard svn12874, or, if you need a VINT build, VINT_Standard svn12548. 
+ 
 </details>
 
 <details>
