@@ -6,14 +6,14 @@ Read through all the notes starting with [Note 1](#note1), or just pick and choo
 
 ## Must read notes
 
-  * Note 1: Hard Reset and DD-WRT upgrade info [Note 1](#note1)
-  * Note 2: Backup files can't be reused [Note 2](#note2)
-  * Note 3: Recommended builds [Note 3](#note3)
-  * Note 4: Understanding DD-WRT build options [Note 4](#note4)
-  * Note 5: Always follow the wiki for first time flashing [Note 5](#note5)
-  * Note 7: Required Posting Info [Note 7](#note7)
-  * Note 9: How to backup your CFE - DO IT! [Note 9](#note9)
-  * Note 18: Miscellaneous EXTREMELY Useful Info [Note 18](#note18)
+  * Hard Reset and DD-WRT upgrade info [Note 1](#note1)
+  * Backup files can't be reused [Note 2](#note2)
+  * Recommended builds [Note 3](#note3)
+  * Understanding DD-WRT build options [Note 4](#note4)
+  * Always follow the wiki for first time flashing [Note 5](#note5)
+  * Required posting info [Note 7](#note7)
+  * How to backup your CFE - DO IT! [Note 9](#note9)
+  * Miscellaneous extremely useful info [Note 18](#note18)
 
 ## Notes for Specific Issues
   
