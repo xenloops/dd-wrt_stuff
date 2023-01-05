@@ -11,7 +11,7 @@ Read through all the notes starting with [Note 1](#note1), or just pick and choo
   * Recommended builds [Note 3](#note3)
   * Understanding dd-wrt build options [Note 4](#note4)
   * Always follow the wiki for first time flashing [Note 5](#note5)
-  * Required posting info [Note 7](#note7)
+  * When asking for help... [Note 7](#note7)
   * How to backup your CFE - DO IT! [Note 9](#note9)
   * Miscellaneous extremely useful info [Note 18](#note18)
 
@@ -240,12 +240,24 @@ If none of the above works, either you are not doing it correctly or you have ha
 </details>
 
 <details>
-  <summary> Note : <a name="note"></a> </summary>
+  <summary> Note 7: When asking for help... <a name="note7"></a> </summary>
 
+Essential information to include when asking the community for help:
+ 
+* **The version number of the dd-wrt firmware used.** It matters. Give the version number, the service pack (SP) number (if any), and the sub-version (e.g. 11296) and/or date of the build. 
+* **The type of the firmware.** This can be found in the top right corner of the dd-wrt GUI and on the status page. A simple way to provide this information is to post the full name of the bin file you used (or tried to use), e.g. "I flashed dd-wrt.v24-14929_NEWD-2_K2.6_mini_usb_ftp.bin." We _need_ this detailed information to assist properly. Don't only write "dd-wrt.v24_micro_generic.bin" without the version number or say you have the "latest build" on your router. "Latest build" can mean many different things. The options are:
+   * Micro, Mini, Standard, or Mega
+   * K26 or k24
+   * Newd, nv60, or nv64
+* **The router make/brand, model and version.** This information should be on the router label -- include everything you can.
+* **Network topography.** If operating more than one device (e.g. router connected to a modem or multiple routers), clearly state how each of the devices is connected to each other (cable, wireless, etc.) and the IP numbers of each, including the modem. Also state whether you wish networked computers to have access to each other or whether they can be isolated. If you are inquiring about wireless signal or problems, state your security type and channel number being used.
+
+This is a test. If you don't post _all of the above information properly_, you fail the test. The community will know you haven't really read this, and you will probably be subject to "friendly reminders" to read Note 7 more carefully.
+ 
 </details>
 
 <details>
-  <summary> Note : <a name="note"></a> </summary>
+  <summary> Note 8: <a name="note8"></a> </summary>
 
 </details>
 
