@@ -264,7 +264,17 @@ _Do not_ do a pin short unless you are ready to throw the router out. Try a JTAG
 </details>
 
 <details>
-  <summary> Note : <a name="note"></a> </summary>
+  <summary> Note 9: Backup your CFE! <a name="note9"></a> </summary>
+
+[Backup your CFE file](http://www.dd-wrt.com/wiki/index.php/CFE_backup) first thing once you have dd-wrt installed. You will thank yourself later.
+ 
+If your router is at the default IP of 192.168.1.1, to backup the CFE just browse to this URL: http://192.168.1.1/backup/cfe.bin. (Change the IP address to the router's IP address.) If using more than one router, be sure to rename the bin file to ease identification later (e.g. Asus520GUCFE.bin).
+
+A router's flash is composed of three parts. The CFE file is the program that boots the router (and is specific to your router), the NVRAM stores the settings, and the kernel. You can erase the NVRAM. You can reflash the kernel. But if you don't have a CFE file for your specific model router, you are out of luck.
+
+The router's MAC address is stored in the CFE file. Your router will lose its MAC address if you install someone else's CFE (though there are ways to fix the MAC address).
+
+This FTP site also has CFEs available: ftp://gakinaction.ddns.net.
 
 </details>
 
@@ -288,7 +298,7 @@ _Do not_ do a pin short unless you are ready to throw the router out. Try a JTAG
 
 </details>
 
-  * How to backup your CFE - DO IT! [Note 9](#note9)
+  *  [Note 9](#note9)
   * Miscellaneous extremely useful info [Note 18](#note18)
   * Memory Issues/P2P [Note 10](#note10)
   * How to Tftp [Note 11](#note11)
