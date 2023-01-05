@@ -257,7 +257,9 @@ This is a test. If you don't post _all of the above information properly_, you f
 </details>
 
 <details>
-  <summary> Note 8: <a name="note8"></a> </summary>
+  <summary> Note 8: Don't Pin Short! <a name="note8"></a> </summary>
+ 
+_Do not_ do a pin short unless you are ready to throw the router out. Try a JTAG recovery first. Yes, you have to wait and be patient, and borrow or build or buy a JTAG. Pin shorting can do irreversible harm. JTAG will not. If you haven't done a pin short, the router is likely recoverable. Many forum members won't waste their time helping you sort out a bricked router after a pin short. [See this post.](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=55577)
 
 </details>
 
@@ -286,3 +288,13 @@ This is a test. If you don't post _all of the above information properly_, you f
 
 </details>
 
+  * How to backup your CFE - DO IT! [Note 9](#note9)
+  * Miscellaneous extremely useful info [Note 18](#note18)
+  * Memory Issues/P2P [Note 10](#note10)
+  * How to Tftp [Note 11](#note11)
+  * Limiting Bandwidth [Note 12](#note12)
+  * Blank Webgui/White Page [Note 13](#note13)
+  * Modem/Wan IP Issues [Note 14](#note14)
+  * Bridging Routers/Public Wifi [Note 15](#note15)
+  * Supported Routers [Note 16](#note16)
+  * Power Supply/Hardware Issues [Note 17](#note17)
