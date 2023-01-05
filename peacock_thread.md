@@ -279,32 +279,99 @@ This FTP site also has CFEs available: ftp://gakinaction.ddns.net.
 </details>
 
 <details>
-  <summary> Note : <a name="note"></a> </summary>
+  <summary> Note 10: Memory Issues with P2P <a name="note10"></a> </summary>
+ 
+If you are having any problems with dd-wrt and are running torrents, close the torrent program completely, power cycle the router, and see if the problems cease.
+
+[P2P file sharing can overwhelm routers.](http://www.dd-wrt.com/wiki/index.php/Router_Slowdown) There is a limit to how much bandwidth any router can handle. If it's used up with P2P, other network operations will suffer.
+
+Recommended memory/connection settings (can assist with many connection issues, not just P2P):
+
+| Router RAM (MB) | 8 | 16 |
+|--|--|--|
+| Max Ports | <= 1024 | 4096 |
+| TCP/UDP | 120 each | 120 each |
+ 
+Even without running torrents, insufficient ram can cause problems (e.g. inability to access the router GUI or slow speeds/timeouts). [Here is detailed information on what to do about insufficient RAM issues](http://www.dd-wrt.com/wiki/index.php/Insufficient_ram).
+
+Knowing how much NVRAM is available can also be important. If the router runs out of NVRAM it will often reboot or the settings may change unexpectedly. If the router can't save its settings (and browser caching isn't the issue and you are clicking "Apply" not just "Save"), NVRAM is the problem. Use these commands (thanks to user DC for this input) to determine the amount of free NVRAM you have:
+
+Go to the Administration > Commands tab in the dd-wrt GUI and enter the following in the Commands box (don't press return at the end of the line; click "Run Commands"): ```nvram show >/dev/null```. The first line of the output will look something like: ```size: 28140 bytes (4628 left)```. In this example there are 4628 bytes of nvram free. If it is less than 500 B, the router is getting low. A hard reset will free it up.
+ 
+</details>
+
+<details>
+  <summary> Note 11: How to use TFTP <a name="note11"></a> </summary>
+
+[Instructions for using TFTP to flash firmware](http://www.dd-wrt.com/wiki/index.php/Tftp_flash).
+
+In order to catch the narrow window available for TFTP flash, use platforms with simple TCP/IP implementations that don't have CTCP implemented: WinXP or Linux are reported to work, but some are reporting significant problems with Vista, Win7 or W2K8. [More information](http://www.dd-wrt.com/phpBB2/viewtopic.php?p=319574#319574).
+ 
+Some items to note when flashing by TFTP:
+
+* Many routers need to be specially prepared _before_ flashing with dd-wrt. Check to see what steps need to be done for your model and version of router in the router's wiki page. 
+* If you do wish to use a post-Windows XP OS, run the app as administrator.
+* Disable firewalls and virus protection prior to flashing.
+* Avoid flashing a large (e.g. Mega) build by TFTP. Flash a smaller build to get the router working, _then_ upgrade using the instructions in Note 1.
+* Make sure your computer hardware, LAN cable, and network adapter are working properly.
+* Connect one computer to a LAN port of the router with a cable. Have no other connections to the router. Make sure the wireless is off.
+* Sometimes you will get a success message when there has not actually been success. If you are trying to TFTP proper firmware, and although it says "success" it is not actually flashing, you might need a cable to recover. See Note 6.
+* Timing is everything with this process. It might help to put the router into management mode. Guidance is available [in this thread](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=47536) on doing this.
 
 </details>
 
 <details>
-  <summary> Note : <a name="note"></a> </summary>
+  <summary> Note 12: Limiting bandwidth <a name="note12"></a> </summary>
+
+There is probably no way to limit bandwidth in the free version of dd-wrt, either per day or by MAC address. It can be done by MAC address in the v.24 special build and will apparently set bandwidth for users, but will not cap it at a certain amount.
+ 
+</details>
+
+<details>
+  <summary> Note 13: Blank GUI/white page <a name="note13"></a> </summary>
+
+If the dd-wrt GUI either does not save settings, does not appear, or has any other problem where you don't seem to be able to contact the router, _and_ you have done a hard reset and are using a recommended build from Note 3, clear the cache in your browser or try a different browser (IE, Firefox, Safari, Opera). If it still is inacessible, power cycle the router (unplug it, wait 30 seconds, then plug it back in). The router's GUI will often be blank after an "apply". Navigate to the router IP address to get back to the GUI. 
+ 
+</details>
+
+<details>
+  <summary> Note 14: Modem/Wan IP Issues <a name="note14"></a> </summary>
+
+Having problems getting internet access through the modem and have no WAN IP? Try these steps:
+
+1. Turn everything off and restart the modem first, then the router once the modem is connected to the ISP.
+1. Check to make sure the MAC address being detected by the modem matches the MAC address of the router by comparing with the router's label. If it doesn't match, on the router browse to the Administration > Commands tab. Enter 
+```
+nvram set et0macaddr=00:11:22:33:44:55
+nvram commit
+```
+(replace ```00:11:22:33:44:55``` with what the MAC should be) 
+Click Run Commands, and power cycle the router.
+1. Look into MAC address cloning, as some ISPs require the MAC address to match what they think it is. If you have changed what was wired to your modem, you might have to clone the old MAC address.
+1. Make sure you have enabled PPPoe in your router, if you need it.
+1. Sometimes you have to put the modem into bridged mode, and let the router handle DCHP. A modem and a router on the same subnet cannot both handle DHCP. One has to be bridged. See your modem instructions on how to do this. More information [here](http://www.dd-wrt.com/wiki/index.php/Access_To_Modem_Configuration) and [here](http://www.dd-wrt.com/wiki/index.php/Modem_-_Connection_to_Router)
+1. Release and renew your ISP IP address. 
 
 </details>
 
 <details>
-  <summary> Note : <a name="note"></a> </summary>
+  <summary> Note 15: Bridging routers/public Wifi <a name="note15"></a> </summary>
 
 </details>
 
 <details>
-  <summary> Note : <a name="note"></a> </summary>
+  <summary> Note 16: Supported routers <a name="note16"></a> </summary>
 
 </details>
 
-  *  [Note 9](#note9)
-  * Miscellaneous extremely useful info [Note 18](#note18)
-  * Memory Issues/P2P [Note 10](#note10)
-  * How to Tftp [Note 11](#note11)
-  * Limiting Bandwidth [Note 12](#note12)
-  * Blank Webgui/White Page [Note 13](#note13)
-  * Modem/Wan IP Issues [Note 14](#note14)
-  * Bridging Routers/Public Wifi [Note 15](#note15)
-  * Supported Routers [Note 16](#note16)
-  * Power Supply/Hardware Issues [Note 17](#note17)
+<details>
+  <summary> Note 17: Power supply/hardware issues <a name="note17"></a> </summary>
+
+</details>
+
+<details>
+  <summary> Note 18: Miscellaneous extremely useful info <a name="note18"></a> </summary>
+
+</details>
+
+ 
