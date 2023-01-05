@@ -357,6 +357,102 @@ Click Run Commands, and power cycle the router.
 <details>
   <summary> Note 15: Bridging routers/public Wifi <a name="note15"></a> </summary>
 
+This is one of the most useful features of dd-wrt for an average user. The differences are described better and more fully [on this page](http://www.dd-wrt.com/wiki/index.php/Repeating_Mode_Comparisons). Basically:
+
+A **repeater** is a router on a different subnet then the access point that broadcasts a new SSID.
+A **repeater bridge** is on the same subnet that broadcasts a new SSID.
+A **client bridge** is on the same subnet as the AP but can't be connected to wirelessly.
+**Client mode** is on a different subnet then the AP and can't be connected to wirelessly.
+
+To set up these modes, follow [the dd-wrt wiki page](http://www.dd-wrt.com/wiki/index.php/Linking_Routers). Do not follow instructions from some random video/site on the internet (even a GitHub page). They are often out of date and wrong. Rely on the dd-wrt wiki for all instructions.
+ 
+Notes:
+* Repeater Bridge and Repeater must usually use the same encryption type _and_ passphrase on both the physical and virtual networks. (See Note 18.) 
+* If using mixed mode WiFi and having difficulty, try switching to G or N only -- mixed modes can be flakey with dd-wrt bridges.
+
+The following is not meant to be a substitute for the detailed information [in the wiki](http://www.dd-wrt.com/wiki/index.php/Linking_Routers), but rather to show the basic differences in the processes. It only covers the basic steps, and does not include the nuances of setting these up. Follow the wiki. 
+
+### Basic settings for Client Bridge Mode: Wired connection no wireless clients (e.g. for a game console)
+
+[Detailed steps are found here](http://www.dd-wrt.com/wiki/index.php/Client_Bridged).
+
+1. Hard Reset Router. 
+1. Change password. 
+1. Set static IP of computer to 192.168.1.10 (same subnet as AP). 
+1. Set IP of CB to same subnet as AP. 
+1. Disable DHCP server. Apply. 
+1. Logon to router at new IP address. 
+1. Put into Client Bridge Mode. 
+1. Set channel to Auto. Apply. 
+1. Set Wireless security to same as Host AP. Apply. 
+1. Go to Status Wireless Site survey and scan for SSID. Click join. Apply. 
+1. Advanced routing. Set to Router. Apply. 
+1. Set computer to auto IP/DNS.
+
+### Basic Settings for Repeater Mode: Wired and wireless clients on a different subnet from access point
+
+[Detailed process is found here](http://www.dd-wrt.com/wiki/index.php/Wlan_Repeater).
+
+ 1. Reset Router. 
+ 1. Set user name and password. 
+ 1. Set IP address to a different subnet than Host AP (eg. 192.168.2.1). Apply. 
+ 1. Set computer to static subnet of Repeater (e.g. 192.168.2.10). 
+ 1. Logon to router at new IP. 
+ 1. Set wireless security to same as Host AP. Apply. 
+ 1. Set wireless mode to repeater. 
+ 1. Set wireless channel to auto. Apply. 
+ 1. Status, wireless site survey. Join SSID. Apply. 
+ 1. Add virtual SSID and create name. Apply. 
+ 1. Set up security for virtual SSID. 
+ 1. Disconnect computer Ethernet cable. 
+ 1. Set Computer IP/DNS auto on Ethernet and wireless. 
+ 1. Connect to new SSID with wireless in computer.
+
+### Basic Settings for Repeater Bridge: Wireless and Wired connections to AP on same subnet of AP
+
+[Detailed instructions are here](http://www.dd-wrt.com/wiki/index.php/Repeater_Bridge).
+
+ 1. Hard reset router. 
+ 1. Reset username and password. 
+ 1. Set RB to same subnet as AP. 
+ 1. Disable DHCP. 
+ 1. Set gateway to AP. Apply. 
+ 1. Logon to router after setting static IP on computer to same subnet, if necessary.
+ 1. Set wireless security to same as AP. Apply.
+ 1. Set mode to repeater bridge.
+ 1. Set channel to auto. Apply.
+ 1. Status, wireless, site survey, join SSID. Apply.
+ 1. Add virtual interface and name new SSID. Apply. 
+ 1. Set security for virtual interface. Apply.
+ 1. Advanced routing. 
+ 1. Set to Router. Apply.
+ 1. Set computer to auto IP and DNS. 
+ 1. Ethernet connection.
+ 1. Join new SSID.
+
+### Client mode: DHCP server on a different subnet then the access point without wireless
+
+The steps are similar to a repeater, but without the virtual SSID. [Detailed instructions are here](http://dd-wrt.com/wiki/index.php/Client_Mode).
+
+### Connect two routers by Ethernet cable
+
+[Detailed instructions are here](http://www.dd-wrt.com/wiki/index.php/Wireless_Access_Point)
+
+### WDS to link routers using the same SSID on all units
+
+ [Detailed instructions are here](http://www.dd-wrt.com/wiki/index.php/WDS_Linked_router_network)
+ 
+ Some notes for this use case:
+ 
+ * Normally, all routers must have the same chipset (e.g. Broadcom) for WDS to work. 
+ * Often need to enable STP on the basic settings page for WPA forms of encryption to work.
+ * Always use WPA2-AES with dd-wrt.
+ * If one of your WDS nodes shows 0 signal, or it isn't working, going to the WDS tab in each router's GUI and clicking "Apply" can often get everything working.
+
+### Separate public WiFi or guest network 
+ 
+ [Detailed instructions are here](http://www.dd-wrt.com/wiki/index.php/Multiple_WLANs).
+ 
 </details>
 
 <details>
