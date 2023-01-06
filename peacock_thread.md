@@ -458,16 +458,46 @@ The steps are similar to a repeater, but without the virtual SSID. [Detailed ins
 <details>
   <summary> Note 16: Supported routers <a name="note16"></a> </summary>
 
+To find out whether a router can be upgraded to dd-wrt, check the [supported devices wiki](http://www.dd-wrt.com/wiki/index.php/Supported_Devices). If not listed, the router is likely not supported. If listed as "wip" (work in progress), search the forums to see if this has changed (forums may be more up-to-date than the wiki). 
+
+The supported devices wiki is often out-of-date with respect to recommended builds, so check the wiki install page for your router. (You can always upgrade to a more recent build if you start with an old build.) The supported devices wiki is more up-to-date with respect to compatible devices, however. At the bottom of the wiki there is also a "known incompatible devices list".
+
+DD-wrt does not work on combination modem/router devices (except one Buffalo Atheros combo unit).
+
+Many new users think that if a router has a Broadcom chipset, or the same CPU as a router that dd-wrt can be flashed to, that they should be able to simply flash some version of dd-wrt on their router. The process to get a router supported is complex. DD-wrt requires a CFE bootloader that many routers do not have. Manufacturers lock their firmware in, making it hard to remove. Supported routers have usually taken months to figure out, by people who are experts at this. If a router is not listed in the supported devices wiki, there is likely a reason. It isn't and can't be supported until one of the developers cracks it, which might never happen. Don't ask in the forums whether a router will be supported. Older routers that are not supported will likely never be supported.
+
+[See how much effort it takes to get dd-wrt on an unsupported router.](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=65443)
+
 </details>
 
 <details>
   <summary> Note 17: Power supply/hardware issues <a name="note17"></a> </summary>
 
+Power supply failure and bad capacitors are both common problems with routers that can often create issues that look like firmware bugs. This is particularly common with Asus and Netgear routers. [See this thread for more information on the problem and how to test for it](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=56939)
+
+[Some useful information on how having better power supplies can benefit WiFi signal](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=54242)
+ 
 </details>
 
 <details>
-  <summary> Note 18: Miscellaneous extremely useful info <a name="note18"></a> </summary>
+  <summary> Note 18: Miscellaneous extremely useful info and troubleshooting <a name="note18"></a> </summary>
 
+* DD-wrt GUI not appearing: try telnet or ssh (username is always root). If that doesn't work, perform a hard reset to get back to the new password entry page.
+* Lost username and/or password: do a hard reset to reset to the defaults. A hard reset will _not_ remove dd-wrt from the router.
+* See the [N configuration wiki article](http://www.dd-wrt.com/wiki/index.php/Wireless-N_Configuration) to get wireless N working properly.
+* [This Xbox connection forum post](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=62809) is a good place to ask for help with problems.
+* Changes between new experimental builds are shown in [the timeline](http://svn.dd-wrt.com:8000/timeline)
+* Remember to click "Apply" in the dd-wrt GUI to make changes in the configuration. "Save" just stores them temporarily in memory without actually applying them.
+* [Advanced wireless settings forum thread](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=51039)
+* For signal quality issues:
+  * Do _not_ raise the TX value. Increasing the TX value is normally a useless/counterproductive setting. Routers normally need to both send (tx) _and_ receive (rx). Increasing TX often either does not work at all or increases noise, which ends up degrading the overall signal quality. 
+  * Many people get a better signal by _decreasing_ RX. Many routers actually do better with _lower_ TX values, around 40-50 (especially those with internal antennas). Buffalo HP units should not be higher than 30. 
+  * Signal issues can be fixed with better antennas, but you need to understand how directional and omni antennas work (see below). Often the best thing to do is just re-position devices.
+  * See the ["Catfish thread" about external antennas])http://www.dd-wrt.com/phpBB2/viewtopic.php?t=43810)
+* Enabling conflicting settings can cause a 100% cpu load (as can P2P programs, as stated in Note 10). [See this thread](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=60382)
+* Here is a [thread about network analysis software](http://www.dd-wrt.com/phpBB2/viewtopic.php?t=57417)
+* The _only_ WiFi security options that work reliably in dd-wrt are WPA2-AES or WEP. _**WEP is broken**_ as a cryptography standard, so _always_ use WPA2-AES.
+ 
 </details>
 
  
