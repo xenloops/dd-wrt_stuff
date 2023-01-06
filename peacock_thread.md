@@ -6,27 +6,27 @@ Read through all the notes starting with [Note 1](#note1), or just pick and choo
 
 ## Must read notes
 
-  * Hard Reset and dd-wrt upgrade info [Note 1](#note1)
-  * Backup files can't be reused [Note 2](#note2)
-  * Recommended builds [Note 3](#note3)
-  * Understanding dd-wrt build options [Note 4](#note4)
-  * Always follow the wiki for first time flashing [Note 5](#note5)
-  * When asking for help... [Note 7](#note7)
-  * How to backup your CFE - DO IT! [Note 9](#note9)
-  * Miscellaneous extremely useful info [Note 18](#note18)
+  * Hard Reset and dd-wrt upgrade info: [Note 1](#note1)
+  * Backup files can't be reused: [Note 2](#note2)
+  * Recommended builds: [Note 3](#note3)
+  * Understanding dd-wrt build options: [Note 4](#note4)
+  * Always follow the wiki for first time flashing: [Note 5](#note5)
+  * When asking for help: [Note 7](#note7)
+  * How to backup your CFE: [Note 9](#note9)
+  * Miscellaneous extremely useful info: [Note 18](#note18)
 
 ## Notes for Specific Issues
   
-  * Testing for bricked routers [Note 6](#note6)
-  * Don't Pin Short! [Note 8](#note8)
-  * Memory Issues/P2P [Note 10](#note10)
-  * How to Tftp [Note 11](#note11)
-  * Limiting Bandwidth [Note 12](#note12)
-  * Blank Webgui/White Page [Note 13](#note13)
-  * Modem/Wan IP Issues [Note 14](#note14)
-  * Bridging Routers/Public Wifi [Note 15](#note15)
-  * Supported Routers [Note 16](#note16)
-  * Power Supply/Hardware Issues [Note 17](#note17)
+  * Testing for bricked routers: [Note 6](#note6)
+  * Don't Pin Short: [Note 8](#note8)
+  * Memory Issues/P2P: [Note 10](#note10)
+  * How to TFTP: [Note 11](#note11)
+  * Limiting Bandwidth: [Note 12](#note12)
+  * Blank GUI/White Page: [Note 13](#note13)
+  * Modem/Wan IP Issues: [Note 14](#note14)
+  * Bridging Routers/Public WiFi: [Note 15](#note15)
+  * Supported Routers: [Note 16](#note16)
+  * Power Supply/Hardware Issues: [Note 17](#note17)
 
 <details>
   <summary> Note 1: Hard Reset and dd-wrt upgrade info <a name="note1"></a> </summary>
